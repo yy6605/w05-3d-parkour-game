@@ -10,18 +10,45 @@
 - 当前角色：红色、绿色
 - 当前玩法：三条跑道、跳跃、滑铲、换道、粉色方块、技巧方块、技能、暂停、角色选择和基础方块玩法教程
 
+## Playable URL
+
+在线游玩地址：[3D Parkour Game](https://yy6605.github.io/w05-3d-parkour-game/)。
+
+该公开 GitHub Pages 站点可直接在浏览器中打开并游玩。
+
 ## 本地运行
 
-1. 在项目根目录打开 PowerShell。
+1. 克隆仓库并进入项目根目录：
+
+   ```bash
+   git clone https://github.com/yy6605/w05-3d-parkour-game.git
+   cd w05-3d-parkour-game
+   ```
+
 2. 启动本地静态服务器：
 
    ```bash
    python -m http.server 8000
    ```
 
-3. 浏览器访问 `http://localhost:8000/w05_3d_game/`。
+3. 在浏览器中打开：
 
-Three.js（r160）已放入项目目录 `w05_3d_game/lib/three.module.js`，importmap 用相对路径加载，离线或本地静态服务器下均可运行，不再依赖外网 CDN。注意：ES 模块在 `file://` 直开时会被浏览器 CORS 策略拦截，请按上面的本地静态服务器方式运行。
+   ```text
+   http://localhost:8000/w05_3d_game/
+   ```
+
+本项目是静态 HTML/CSS/JavaScript 游戏，不需要运行 `npm install`，也不需要构建步骤。Three.js（r160）保存在本地的 `w05_3d_game/lib/three.module.js`，通过相对路径 import map 加载。请不要直接通过 `file://` 打开 `index.html`，因为浏览器的 CORS 策略可能阻止 ES 模块加载；请使用上述本地静态服务器方式运行。
+
+## 发布说明
+
+本项目使用 GitHub Pages 发布，发布来源为 `main` 分支的 `/docs` 目录。
+
+1. Publisher（M1）负责在发布前将完整可部署的静态站点放入 `docs/`，包括 `docs/index.html` 及它引用的所有文件，例如 `docs/lib/three.module.js`。
+2. 将已通过 review 的 PR 合并到团队仓库的 `main` 分支。
+3. GitHub Pages 自动发布 `main/docs` 中的内容。
+4. 部署完成后，打开[在线游玩地址](https://yy6605.github.io/w05-3d-parkour-game/)并确认游戏及其资源能够正常加载。
+
+> 注意：当前开发源文件存放在 `w05_3d_game/`。由于 GitHub Pages 配置为发布 `main/docs`，M1 必须在最终部署前确认 `docs/` 中存在与开发源对应的完整可部署文件；如果 `docs/` 尚未补齐，不能将线上链接的成功访问视为本次最终版本已经发布成功。
 ## Purpose（游戏介绍）
 
 这是一款使用 HTML、CSS、JavaScript 和 Three.js 制作的浏览器 3D 跑酷游戏。玩家在三条跑道之间切换，通过跳跃、二段跳和滑铲躲避障碍，收集粉色能量方块，为角色技能充能并争取更高分。
